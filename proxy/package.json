@@ -1,0 +1,12 @@
+{
+	"dependencies": {
+		"@unleash/proxy": "^0.0.6",
+		"dotenv": "^10.0.0"
+	},
+	"scripts": {
+		"start": "node index.js"
+	},
+	"engines": {
+		"node": ">=14.x"
+	}
+}
