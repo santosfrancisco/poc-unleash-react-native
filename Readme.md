@@ -14,7 +14,7 @@ O app foi criado usando o React-native na versão 0.63.4.
 
 O proxy usa o [@unleash/proxy](https://www.npmjs.com/package/@unleash/proxy)
 
-O SDK para integrar o app com o Unleash é o [@unleash/proxy-client-react](https://www.npmjs.com/package/@unleash/proxy)
+O SDK para integrar o app com o Unleash é o [@unleash/proxy-client-react](https://github.com/Unleash/proxy-client-react)
 
 # Testando tudo integrado
 
