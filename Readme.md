@@ -21,7 +21,7 @@ O SDK para integrar o app com o Unleash é o [@unleash/proxy-client-react](https
 Inicie a aplicação React-native
 
 ```
-cd unleashpoc
+cd app
 yarn install
 yarn android ou yarn ios
 ```
