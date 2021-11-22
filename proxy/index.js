@@ -14,7 +14,7 @@ const app = createApp({
     "s1",
   ],
   refreshInterval: 1000,
-  // logLevel: 'info',
+  logLevel: "info",
   // projectName: 'order-team',
   // environment: 'development',
 });

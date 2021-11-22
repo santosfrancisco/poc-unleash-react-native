@@ -43,7 +43,7 @@ Caso queira testar com um servidor Unleash local usando Node ao invés do Heroku
 > Aqui usaremos o docker para criar o Postgres
 
 1. Execute `docker run --name unleash-postgres -e POSTGRES_PASSWORD=some_password -e POSTGRES_USER=unleash_user -e POSTGRES_DB=unleash -d -p 5432:5432 postgres` para iniciar o Postgres
-2. No diretório `/server` execute `node server.js`
+2. No diretório `/server` execute `yarn isntall` e depois `yarn start`
 3. Abra [`https://localhost:4242`](https://localhost:4242)
 4. Acesse com as credenciais abaixo
 
