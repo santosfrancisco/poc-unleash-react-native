@@ -1,4 +1,5 @@
 const unleash = require("unleash-server");
+const azureADHook = require("./azure-hook");
 
 unleash
   .start({
@@ -9,6 +10,10 @@ unleash
       database: "unleash",
       user: "unleash_user",
       password: "some_password",
+    },
+    authentication: {
+      type: "custom",
+      customAuthHandler: azureADHook,
     },
     server: {
       port: 4242,
