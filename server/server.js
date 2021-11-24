@@ -1,5 +1,6 @@
 const unleash = require("unleash-server");
-const azureADHook = require("./azure-hook");
+const azureHookPassport = require("./azure-hook-passport");
+const azureADHook = require("./azure-ad-hook");
 
 unleash
   .start({
@@ -15,6 +16,7 @@ unleash
       type: "custom",
       customAuthHandler: azureADHook,
     },
+    logLevel: "debug",
     server: {
       port: 4242,
     },

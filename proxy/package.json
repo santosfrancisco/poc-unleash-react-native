@@ -1,7 +1,8 @@
 {
 	"dependencies": {
 		"@unleash/proxy": "^0.0.6",
-		"dotenv": "^10.0.0"
+		"dotenv": "^10.0.0",
+		"express-session": "^1.17.2"
 	},
 	"scripts": {
 		"start": "node index.js"

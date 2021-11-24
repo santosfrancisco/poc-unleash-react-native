@@ -1,12 +1,24 @@
 const passport = require("passport");
 const passportAD = require("passport-azure-ad");
 const OIDCStrategy = passportAD.OIDCStrategy;
-const azureConfig = require("./azure-config");
+const config = require("./config");
 
-function enableAzureAd(app, _, services) {
+function regenerateSessionAfterAuthentication(req, res, next) {
+  var passportInstance = req.session.passport;
+  return req.session.regenerate(function (err) {
+    if (err) {
+      return next(err);
+    }
+    req.session.passport = passportInstance;
+    return req.session.save(next);
+  });
+}
+
+function enableAzureAd(app, unleashAppConfig, services) {
+  const { baseUriPath } = unleashAppConfig.server;
   const { userService } = services;
   passport.use(
-    new OIDCStrategy(azureConfig, function (profile, done) {
+    new OIDCStrategy(config.passportConfig, function (profile, done) {
       if (!profile.oid) {
         return done(new Error("Sem acesso ao perfil."), null);
       }
@@ -30,6 +42,7 @@ function enableAzureAd(app, _, services) {
     passport.authenticate("azuread-openidconnect", {
       failureRedirect: "/api/admin/error-login",
     }),
+    regenerateSessionAfterAuthentication,
     (req, res) => {
       res.redirect("/");
     }
@@ -40,6 +53,7 @@ function enableAzureAd(app, _, services) {
     passport.authenticate("azuread-openidconnect", {
       failureRedirect: "/api/admin/error-login",
     }),
+    regenerateSessionAfterAuthentication,
     (req, res) => {
       res.redirect("/");
     }
