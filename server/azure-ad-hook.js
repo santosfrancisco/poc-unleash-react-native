@@ -13,7 +13,7 @@ const azureADHook = (app, unleashAppConfig, services) => {
   app.get("/auth/azure/login", (req, res) => {
     const authCodeUrlParameters = {
       scopes: ["user.read"],
-      redirectUri: `http://localhost:4242/redirect`,
+      redirectUri: `http://localhost:4242/api/auth/callback`,
     };
 
     // get url to sign user in and consent to scopes needed for application
@@ -25,11 +25,11 @@ const azureADHook = (app, unleashAppConfig, services) => {
       .catch((error) => console.log(JSON.stringify(error)));
   });
 
-  app.get("/redirect", async (req, res, next) => {
+  app.get("/api/auth/callback", async (req, res, next) => {
     const tokenRequest = {
       code: req.query.code,
       scopes: ["user.read"],
-      redirectUri: `http://localhost:4242/redirect`,
+      redirectUri: `http://localhost:4242/api/auth/callback`,
     };
 
     cca
