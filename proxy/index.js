@@ -2,6 +2,18 @@ const port = 3000;
 require("dotenv").config();
 const { createApp } = require("@unleash/proxy");
 
+const { Strategy } = require("unleash-client");
+
+class PlatformStrategy extends Strategy {
+  constructor() {
+    super("Platform");
+  }
+
+  isEnabled(parameters, context) {
+    return context.properties.platform === parameters.platform;
+  }
+}
+
 const app = createApp({
   unleashUrl:
     process.env.UNLEASH_URL || "https://app.unleash-hosted.com/demo/api/",
@@ -14,7 +26,8 @@ const app = createApp({
     "s1",
   ],
   refreshInterval: 1000,
-  logLevel: "info",
+  logLevel: "debug",
+  customStrategies: [new PlatformStrategy()],
   // projectName: 'order-team',
   // environment: 'development',
 });

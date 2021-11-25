@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, View, Text} from 'react-native';
+import {SafeAreaView, View, Text, Platform} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import FlagProvider, {
@@ -55,6 +55,7 @@ const MyComponent = () => {
   const feature = 'app.nova-feature';
   const featureRolout = 'app.rolout-feature';
   const featurePorCpf = 'app.feature-por-cpf';
+  const featurePorPlataforma = 'app.por-plataforma';
   const featureComVariant = 'app.feature-com-variant';
 
   const updateContext = useUnleashContext();
@@ -62,6 +63,9 @@ const MyComponent = () => {
 
   React.useEffect(() => {
     updateContext({userId: `${CPF}`});
+    updateContext({
+      properties: {platform: Platform.OS === 'ios' ? 'ios' : 'android'},
+    });
   }, [flagsReady]);
 
   if (flagsError) {
@@ -84,6 +88,7 @@ const MyComponent = () => {
             <Feature featureName={feature} />
             <Feature featureName={featurePorCpf} />
             <Feature featureName={featureRolout} />
+            <Feature featureName={featurePorPlataforma} />
             <Variant featureName={featureComVariant} />
           </View>
         </>
