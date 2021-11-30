@@ -38,11 +38,19 @@ const azureADHook = (app, unleashAppConfig, services) => {
         // aqui o login com o Azure AD teve sucesso
         console.log("\nResponse: \n:", response);
 
+        const users = {
+          ADMIN = "Admin", // Cria/edita usuários, feature toggles, estratégias, gerencia tokens de API e acessa histórico de eventos
+          EDITOR = "Editor", // Cria/edita feature toggles, estratégias
+          VIEWER = "Viewer", // Somente visualiza
+        }
+
         // aqui cria o user do Unleash
-        const user = await userService.loginUserWithoutPassword(
-          response.account.username,
-          true
-        );
+        const user = await userService.loginUserSSO({
+          email: response.account.username,
+          rootRole: users.ADMIN,
+          autoCreate: true,
+        });
+
         req.session.user = user;
 
         // Usuário logado, redireciona pra home do Unleash
