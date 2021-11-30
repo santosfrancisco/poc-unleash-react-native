@@ -39,10 +39,10 @@ const azureADHook = (app, unleashAppConfig, services) => {
         console.log("\nResponse: \n:", response);
 
         const users = {
-          ADMIN = "Admin", // Cria/edita usuários, feature toggles, estratégias, gerencia tokens de API e acessa histórico de eventos
-          EDITOR = "Editor", // Cria/edita feature toggles, estratégias
-          VIEWER = "Viewer", // Somente visualiza
-        }
+          ADMIN: "Admin", // Cria/edita usuários, feature toggles, estratégias, gerencia tokens de API e acessa histórico
+          EDITOR: "Editor", // Cria/edita feature toggles, estratégias
+          VIEWER: "Viewer", // Somente visualiza
+        };
 
         // aqui cria o user do Unleash
         const user = await userService.loginUserSSO({
