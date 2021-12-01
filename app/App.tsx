@@ -53,7 +53,7 @@ const App = () => {
 
 const MyComponent = () => {
   const feature = 'app.nova-feature';
-  const featureRolout = 'app.rolout-feature';
+  const featureRollout = 'app.rollout-feature';
   const featurePorCpf = 'app.feature-por-cpf';
   const featurePorPlataforma = 'app.por-plataforma';
   const featureComVariant = 'app.feature-com-variant';
@@ -62,8 +62,8 @@ const MyComponent = () => {
   const {flagsReady, flagsError} = useFlagsStatus();
 
   React.useEffect(() => {
-    updateContext({userId: `${CPF}`});
     updateContext({
+      userId: `${CPF}`,
       properties: {platform: Platform.OS === 'ios' ? 'ios' : 'android'},
     });
   }, [flagsReady]);
@@ -87,7 +87,7 @@ const MyComponent = () => {
           <View style={{alignItems: 'center'}}>
             <Feature featureName={feature} />
             <Feature featureName={featurePorCpf} />
-            <Feature featureName={featureRolout} />
+            <Feature featureName={featureRollout} />
             <Feature featureName={featurePorPlataforma} />
             <Variant featureName={featureComVariant} />
           </View>
