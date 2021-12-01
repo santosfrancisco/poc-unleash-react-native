@@ -16,6 +16,11 @@ unleash
       type: "custom",
       customAuthHandler: azureADHook,
     },
+    experimental: {
+      environments: {
+        enabled: true,
+      },
+    },
     logLevel: "debug",
     server: {
       port: 4242,
