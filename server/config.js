@@ -3,7 +3,8 @@ const msal = require("@azure/msal-node");
 
 const tenantGUID = process.env.AZURE_AD_TENANT;
 const clientID = process.env.AZURE_AD_CLIENT;
-const redirectUrl = process.env.AZURE_AD_REDIRECT_URL;
+const hostUrl = process.env.UNLEASH_HOST_URL;
+const redirectUrl = `${hostUrl}${process.env.AZURE_AD_REDIRECT_URL}`;
 const clientSecret = process.env.AZURE_AD_SECRET;
 const allowHttp = process.env.AZURE_AD_ALLOW_HTTP === "true";
 const identityMetadata = `https://login.microsoftonline.com/${tenantGUID}/v2.0/.well-known/openid-configuration`;
@@ -43,4 +44,6 @@ const msalConfig = {
 module.exports = {
   msalConfig,
   passportConfig,
+  redirectUrl,
+  hostUrl,
 };

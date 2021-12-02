@@ -24,8 +24,20 @@ function enableAzureAd(app, unleashAppConfig, services) {
       }
       // asynchronous verification, for effect...
       process.nextTick(async function () {
+        const roles = {
+          ADMIN: "Admin", // Cria/edita usuários, feature toggles, estratégias, gerencia tokens de API e acessa histórico
+          EDITOR: "Editor", // Cria/edita feature toggles, estratégias
+          VIEWER: "Viewer", // Somente visualiza
+        };
+
         const email = profile._json.preferred_username;
-        const user = await userService.loginUserWithoutPassword(email, true);
+
+        // aqui cria o user do Unleash
+        const user = await userService.loginUserSSO({
+          email,
+          rootRole: roles.ADMIN,
+          autoCreate: true,
+        });
         done(null, user);
       });
     })
@@ -35,7 +47,14 @@ function enableAzureAd(app, unleashAppConfig, services) {
   passport.deserializeUser((user, done) => done(null, user));
 
   app.use(passport.initialize());
-  app.use(passport.session());
+  app.use(
+    passport.session({
+      cookie: {
+        sameSite: "none",
+        secure: true,
+      },
+    })
+  );
 
   app.post(
     "/api/auth/callback",
